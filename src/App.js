@@ -3,15 +3,20 @@ import './App.css';
 import data from './data/data.js'
 import SongTrack from './components/track/index.js'
 
-function App() {
-  return (
+const App = () => {
+  const track = data.map((e) => (
     <div className="contents">
       <SongTrack 
-      src={data.album.images[1].url}
-      title={data.album.name}
-      artist={data.album.artists[0].name}
-      />
+        src={e.album.images[2].url}
+        title={e.name}
+        artist={e.artists[0].name}
+        album={e.album.name}
+        />
     </div>
+  ))
+
+  return (
+    track
   )
 }
 
