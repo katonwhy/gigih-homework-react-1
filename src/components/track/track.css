@@ -1,0 +1,64 @@
+
+* {
+    box-sizing: border-box;
+}
+  .content {
+    display: flex;
+    align-items: stretch;
+    margin: 10px 200px;
+    padding: 10px;
+    background-color: #222222;
+    border: 2px solid #3b3b3b;
+  }
+  .info {
+    text-align: left;
+    padding: 0 10px;
+  }
+
+  .img{
+    flex-basis: 10%;
+  }
+  .title{
+    flex-basis: 25%;
+  }
+  .artist{
+    flex-basis: 20%;
+  }
+  .album{
+    flex-basis: 30%;
+  }
+  .play{
+    flex-basis: 15%;
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  .img img{
+    width: 64px;
+  }
+  .content p {
+    font-size: 18px;
+    margin-top: 20px;
+    color: #e1e1e1;
+  }
+  
+  .btn {
+    color: white;
+    display: inline-block;
+    opacity: 0.8;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .message {
+    padding: 15px 20px;
+    background-color: #cd5c5c;
+    cursor: pointer;
+    box-shadow: 0 7px #8b0000;
+  }
+  
+  .message:active {
+    position: relative;
+    top: 7px;
+    box-shadow: none;
+  }
+  
