@@ -1,24 +1,23 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import config from "../../library/config";
 import './search.css'
 
-class Search extends Component {
+const Search = ({accessToken, onSuccess, onClearSearch}) => {
 
-    state = {
-        text : '',
+    const [text, setText] = useState('')
+    const [isClear, setIsClear] = useState(true)
+
+    const handleInput= (e) => {
+        setText(e.target.value);
+        console.log(text)
     }
 
-    handleInput= (e) => {
-        this.setState({text : e.target.value});
-    }
-
-    onSubmit = async (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
-        const { text } = this.state
 
         var request = {
             headers: {
-                'Authorization': 'Bearer ' + this.props.accessToken,
+                'Authorization': 'Bearer ' + accessToken,
                 'Content-Type' : 'application/json',
             }
         }
@@ -26,24 +25,30 @@ class Search extends Component {
         const response = await fetch(`${config.SPOTIFY_BASE_URL}/search?type=track&q=${text}`, request).then((data) => data.json())
 
         const tracks = response.tracks.items
-        this.props.onSuccess(tracks)
+        onSuccess(tracks)
+        setIsClear(false)
         console.log(response)
         
     }
 
-    render() {
-    
-        return(
-            <div className="SearchSong">
-                {console.log(this.state.text)}
-                <h1>Song Search</h1>
-                <form onSubmit={(e) => this.onSubmit(e)}>
-                    <input type="text" id="song" name="song" onChange={this.handleInput}/>
-                    <input type="submit" value="submit"/>
-                </form>
-            </div>
-        )
-    } 
+    const handleClear = () => {
+        setText('');
+        setIsClear(true);
+        onClearSearch();
+    }
+
+    return(
+        <div className="SearchSong">
+            <h1>Song Search</h1>
+            <form onSubmit={(e) => onSubmit(e)}>
+                <input type="text" id="song" name="song" onChange={handleInput}/>
+                <input type="submit" value="Submit"/>
+            </form>
+            {!isClear &&(
+                <button onClick={handleClear}>Clear Search</button>
+            )}
+        </div>
+    )  
         
 }
 
