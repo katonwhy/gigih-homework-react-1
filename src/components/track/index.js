@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import './track.css';
 import { FaPlay } from "react-icons/fa";
 
-const SongTrack = ({src , title, artist, album}) => {
+const SongTrack = ({src , title, artist, album, toggleSelect}) => {
+    const [isSelected, setIsSelected] = useState(false)
+
+    const handleToggleSelect = () => {
+        setIsSelected(!isSelected)
+        toggleSelect()
+    }
+
     return (
         <div className="content">
             <div className="info img">
@@ -21,7 +28,7 @@ const SongTrack = ({src , title, artist, album}) => {
                 <p>{album}</p>            
             </div>
             <div className="info play">
-                <span class="btn message"><FaPlay/></span>
+                <span class="btn message" onClick={handleToggleSelect}>{isSelected ? 'Deselect' : 'Select'}</span>
             </div>
         </div>
     )
