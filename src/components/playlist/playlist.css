@@ -1,0 +1,10 @@
+.Playlist {
+    text-align: center;
+}
+.Playlist h2, label{
+    color: aliceblue;
+}
+hr {
+    margin-top: 50px;
+    border: 1px solid #3b3b3b;
+}
