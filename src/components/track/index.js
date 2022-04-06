@@ -28,7 +28,7 @@ const SongTrack = ({src , title, artist, album, toggleSelect}) => {
                 <p>{album}</p>            
             </div>
             <div className="info play">
-                <span class="btn message" onClick={handleToggleSelect}>{isSelected ? 'Deselect' : 'Select'}</span>
+                <span className="btn message" onClick={handleToggleSelect}>{isSelected ? 'Deselect' : 'Select'}</span>
             </div>
         </div>
     )

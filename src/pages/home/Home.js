@@ -3,6 +3,7 @@ import SongTrack from '../../components/track/index.js'
 import Search from "../../components/search/index.js"
 import config from '../../library/config.js'
 import './Home.css'
+import Playlist from "../../components/playlist/index.js";
 
 const Home = () => {
 
@@ -90,6 +91,10 @@ const Home = () => {
         <div className="login">
             <a href={`${getSpotifyLinkAuthorize()}`}>Login</a>
         </div>
+        <Playlist
+            accessToken={accessToken}
+            uris={selectedTracksUri}
+        />
         <Search 
             accessToken = {accessToken}
             onSuccess = {(tracks) => onSuccessSearch(tracks)}

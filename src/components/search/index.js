@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import config from "../../library/config";
 import './search.css'
+import SearchBar from "./SearchBar";
 
 const Search = ({accessToken, onSuccess, onClearSearch}) => {
 
@@ -40,10 +41,11 @@ const Search = ({accessToken, onSuccess, onClearSearch}) => {
     return(
         <div className="SearchSong">
             <h1>Song Search</h1>
-            <form onSubmit={(e) => onSubmit(e)}>
-                <input type="text" id="song" name="song" onChange={handleInput}/>
-                <input type="submit" value="Submit"/>
-            </form>
+            <SearchBar 
+                text={text}
+                onSubmit={onSubmit}
+                handleInput={handleInput}
+            />
             {!isClear &&(
                 <button onClick={handleClear}>Clear Search</button>
             )}
