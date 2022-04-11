@@ -4,14 +4,18 @@ import Search from "../../components/search/index.js"
 import config from '../../library/config.js'
 import './Home.css'
 import Playlist from "../../components/playlist/index.js";
+import { useSelector, useDispatch } from "react-redux";
+import saveAccessToken from "../../redux/accessToken/accessTokenActions.js";
 
 const Home = () => {
 
-    const [accessToken, setAccessToken] = useState('')
+    //const [accessToken, setAccessToken] = useState('')
     //const [isAuthorize, setIsAuthorize] = useState(false)
     const [tracks, setTracks] = useState([])
     const [selectedTracksUri, setSelectedTracksUri] = useState([])
     const [isInSearch, setIsInSearch] = useState(false);
+
+    const dispatch = useDispatch()
 
     // const getHashParams = () => {
     //     const hashParams = {};
@@ -36,12 +40,13 @@ const Home = () => {
 
     useEffect(() => {
         //const params = getHashParams()
-        const accessToken = new URLSearchParams(window.location.hash).get('#access_token')
+        const accessTokenUrl = new URLSearchParams(window.location.hash).get('#access_token')
         //const { access_token: setAccessToken } = params
-        setAccessToken(accessToken);
-        console.log(accessToken)
+        //setAccessToken(accessToken);
+        dispatch(saveAccessToken(accessTokenUrl))
     }, [])
-
+    console.log(useSelector((state) => state.accessToken))
+    
     useEffect(() => {
         if (!isInSearch) {
             const selectedTracks = filterSelectedTracks()
@@ -92,11 +97,11 @@ const Home = () => {
             <a href={`${getSpotifyLinkAuthorize()}`}>Login</a>
         </div>
         <Playlist
-            accessToken={accessToken}
+            accessToken={useSelector((state) => state.accessToken)}
             uris={selectedTracksUri}
         />
         <Search 
-            accessToken = {accessToken}
+            accessToken = {useSelector((state) => state.accessToken)}
             onSuccess = {(tracks) => onSuccessSearch(tracks)}
             onClearSearch = {clearSearch}
         />
