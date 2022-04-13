@@ -10,10 +10,10 @@ import saveAccessToken from "../../redux/accessToken/accessTokenActions.js";
 const Home = () => {
 
     //const [accessToken, setAccessToken] = useState('')
-    //const [isAuthorize, setIsAuthorize] = useState(false)
+    const [isAuthorize, setIsAuthorize] = useState(false)
     const [tracks, setTracks] = useState([])
     const [selectedTracksUri, setSelectedTracksUri] = useState([])
-    const [isInSearch, setIsInSearch] = useState(false);
+    const [isInSearch, setIsInSearch] = useState(true);
 
     const dispatch = useDispatch()
 
@@ -44,6 +44,7 @@ const Home = () => {
         //const { access_token: setAccessToken } = params
         //setAccessToken(accessToken);
         dispatch(saveAccessToken(accessTokenUrl))
+        //setIsAuthorize(true)
     }, [])
     console.log(useSelector((state) => state.accessToken))
     
@@ -92,31 +93,33 @@ const Home = () => {
     }
         
     return(
-    <>
-        <div className="login">
-            <a href={`${getSpotifyLinkAuthorize()}`}>Login</a>
-        </div>
-        <Playlist
+        <>
+            <div className="login">
+                <a href={`${getSpotifyLinkAuthorize()}`}>Login</a>
+            </div>
+        
+            <Playlist
             accessToken={useSelector((state) => state.accessToken)}
             uris={selectedTracksUri}
-        />
-        <Search 
+            />
+            <Search 
             accessToken = {useSelector((state) => state.accessToken)}
             onSuccess = {(tracks) => onSuccessSearch(tracks)}
             onClearSearch = {clearSearch}
-        />
-        {tracks.map((e) => (
-            <div className="contents">
-            <SongTrack 
-                src={e.album.images[2].url}
-                title={e.name}
-                artist={e.artists[0].name}
-                album={e.album.name}
-                toggleSelect={() => toggleSelect(e)}
-                />
-            </div>
-        ))}
-    </>
+            />
+            {tracks.map((e) => (
+                <div className="contents">
+                <SongTrack 
+                    src={e.album.images[2].url}
+                    title={e.name}
+                    artist={e.artists[0].name}
+                    album={e.album.name}
+                    toggleSelect={() => toggleSelect(e)}
+                    />
+                </div>
+            ))}
+        </>        
+        
     )
     
 }

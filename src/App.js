@@ -1,14 +1,21 @@
 import React from "react";
 import './App.css';
 import Home from './pages/home/Home.js'
-import { Provider } from "react-redux";
-import store from "./redux/store";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <Home />
-    </Provider>
+    <Router>
+      <Switch>
+        <Route path="/">
+          <Home />
+        </Route>
+        <Route path="/create-playlist">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 
