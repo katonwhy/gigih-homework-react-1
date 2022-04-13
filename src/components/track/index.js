@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import './track.css';
-import { FaPlay } from "react-icons/fa";
 
 const SongTrack = ({src , title, artist, album, toggleSelect}) => {
     const [isSelected, setIsSelected] = useState(false)

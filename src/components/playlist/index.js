@@ -9,8 +9,6 @@ const Playlist = ({accessToken, uris}) => {
         name : "",
         description : ""
     })
-    //const [userId, setUserId] =useState('')
-    //const [playlistId, setPlaylistId] = useState('')
 
     const handleForm = (e) => {
         const { name, value } = e.target
@@ -31,9 +29,7 @@ const Playlist = ({accessToken, uris}) => {
         const response = await fetch(`${config.SPOTIFY_BASE_URL}/me`, request).then((data) => data.json())
 
         const responseUserId = response.id
-        //setUserId(responseUserId)
-        //onSuccess(tracks)
-        //setIsClear(false)
+        
         console.log(responseUserId)
 
 
