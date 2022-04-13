@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SongTrack from '../../components/track/index.js'
 import Search from "../../components/search/index.js"
 import config from '../../library/config.js'
@@ -9,40 +9,15 @@ import saveAccessToken from "../../redux/accessToken/accessTokenActions.js";
 
 const Home = () => {
 
-    //const [accessToken, setAccessToken] = useState('')
-    const [isAuthorize, setIsAuthorize] = useState(false)
+    //const [isAuthorize, setIsAuthorize] = useState(false)
     const [tracks, setTracks] = useState([])
     const [selectedTracksUri, setSelectedTracksUri] = useState([])
     const [isInSearch, setIsInSearch] = useState(true);
 
     const dispatch = useDispatch()
 
-    // const getHashParams = () => {
-    //     const hashParams = {};
-    //     const r = /([^&;=]+)=?([^&;]*)/g;
-    //     const q = window.location.hash.substring(1);
-    //     let e = r.exec(q);
-    
-    //     while (e) {
-    //       hashParams[e[1]] = decodeURIComponent(e[2]);
-    //       e = r.exec(q);
-    //     }
-    //     return hashParams;
-    // }
-    
-    // const componentDidMount = () => {
-    //     const params = getHashParams();
-    //     const { access_token: accessToken } = params;
-
-    //     this.setState({ accessToken, isAuthorize: accessToken !== undefined })
-        
-    // }
-
     useEffect(() => {
-        //const params = getHashParams()
         const accessTokenUrl = new URLSearchParams(window.location.hash).get('#access_token')
-        //const { access_token: setAccessToken } = params
-        //setAccessToken(accessToken);
         dispatch(saveAccessToken(accessTokenUrl))
         //setIsAuthorize(true)
     }, [])
@@ -73,7 +48,6 @@ const Home = () => {
         const searchDistinctTracks = searchTracks.filter(track => !selectedTracksUri.includes(track.uri))
 
         setTracks([...selectedTracks, ...searchDistinctTracks])
-        //console.log(searchTracks)
     }
 
     const clearSearch = () => {
@@ -110,6 +84,7 @@ const Home = () => {
             {tracks.map((e) => (
                 <div className="contents">
                 <SongTrack 
+                    key={e.id}
                     src={e.album.images[2].url}
                     title={e.name}
                     artist={e.artists[0].name}
