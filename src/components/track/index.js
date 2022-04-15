@@ -9,27 +9,29 @@ const SongTrack = ({src , title, artist, album, toggleSelect}) => {
         toggleSelect()
     }
 
-    return (
-        <div className="content">
-            <div className="info img">
-                <img
-                    src={src}
-                    alt={title}
-                />
+    return (            
+            <div className="Track">
+                <div className="Img">
+                    <img
+                        src={src}
+                        alt={title}
+                        />
+                </div>
+                <div className="Info">
+                    <div className="title">
+                        <h2>{title}</h2>            
+                    </div>
+                    <div className="artist">
+                        <p>{artist}</p>
+                    </div>
+                    <div className="album">
+                        <p>{album}</p>            
+                    </div>
+                    <div className="play">
+                        <span className="btn message" onClick={handleToggleSelect}>{isSelected ? 'Deselect' : 'Select'}</span>
+                    </div>
+                </div>
             </div>
-            <div className="info title">
-                <p>{title}</p>            
-            </div>
-            <div className="info artist">
-                <p>{artist}</p>
-            </div>
-            <div className="info album">
-                <p>{album}</p>            
-            </div>
-            <div className="info play">
-                <span className="btn message" onClick={handleToggleSelect}>{isSelected ? 'Deselect' : 'Select'}</span>
-            </div>
-        </div>
     )
 }
 

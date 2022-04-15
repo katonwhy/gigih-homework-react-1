@@ -1,3 +1,26 @@
+.GridContainer{
+    display: grid;
+    grid-template-areas:
+        'main main main main right right';
+    gap: 10px;
+    padding: 10px 50px;
+    background-color:#222222;
+}
+
+.Main{
+    grid-area: main;
+}
+
+.Right{
+    grid-area: right;
+}
+
 .login {
     text-align: center;
 }
+
+.Tracks{
+    display: grid;
+    grid-template-areas: 'track track';
+    gap: 30px
+  }
