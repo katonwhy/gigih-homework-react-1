@@ -6,6 +6,7 @@ import './Home.css'
 import Playlist from "../../components/playlist/index.js";
 import { useSelector, useDispatch } from "react-redux";
 import saveAccessToken from "../../redux/accessToken/accessTokenActions.js";
+import Button from '@material-ui/core/Button';
 
 const Home = () => {
 
@@ -71,7 +72,7 @@ const Home = () => {
             <div className="Main">
 
                 <div className="login">
-                    <a href={`${getSpotifyLinkAuthorize()}`}>Login</a>
+                    <Button variant="contained" color="primary" href={`${getSpotifyLinkAuthorize()}`}>Login</Button>
                 </div>
 
                 <Search 

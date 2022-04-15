@@ -1,3 +1,5 @@
+import Button from '@material-ui/core/Button';
+
 const PlaylistForm = ({form, onSubmit, handleForm}) => {
     return(
         <form onSubmit={onSubmit}>
@@ -21,7 +23,8 @@ const PlaylistForm = ({form, onSubmit, handleForm}) => {
                 value={form.description}
                 onChange={handleForm}
             />
-            <input type="submit" value="Submit"/>
+             <Button variant="outlined" type='submit' color="secondary">Submit</Button>
+
         </form>
     )
 }
