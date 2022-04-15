@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import config from "../../library/config";
 import './search.css'
 import SearchBar from "./SearchBar";
+import Button from '@material-ui/core/Button';
 
 const Search = ({accessToken, onSuccess, onClearSearch}) => {
 
@@ -47,7 +48,7 @@ const Search = ({accessToken, onSuccess, onClearSearch}) => {
                 handleInput={handleInput}
             />
             {!isClear &&(
-                <button onClick={handleClear}>Clear Search</button>
+                <Button variant="contained" color="secondary" onClick={handleClear}>Clear Search</Button>
             )}
         </div>
     )  
