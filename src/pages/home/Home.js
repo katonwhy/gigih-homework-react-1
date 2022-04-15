@@ -67,33 +67,41 @@ const Home = () => {
     }
         
     return(
-        <>
-            <div className="login">
-                <a href={`${getSpotifyLinkAuthorize()}`}>Login</a>
-            </div>
-        
-            <Playlist
-            accessToken={useSelector((state) => state.accessToken)}
-            uris={selectedTracksUri}
-            />
-            <Search 
-            accessToken = {useSelector((state) => state.accessToken)}
-            onSuccess = {(tracks) => onSuccessSearch(tracks)}
-            onClearSearch = {clearSearch}
-            />
-            {tracks.map((e) => (
-                <div className="contents">
-                <SongTrack 
-                    key={e.id}
-                    src={e.album.images[2].url}
-                    title={e.name}
-                    artist={e.artists[0].name}
-                    album={e.album.name}
-                    toggleSelect={() => toggleSelect(e)}
-                    />
+        <div className="GridContainer">
+            <div className="Main">
+
+                <div className="login">
+                    <a href={`${getSpotifyLinkAuthorize()}`}>Login</a>
                 </div>
-            ))}
-        </>        
+
+                <Search 
+                accessToken = {useSelector((state) => state.accessToken)}
+                onSuccess = {(tracks) => onSuccessSearch(tracks)}
+                onClearSearch = {clearSearch}
+                />
+                <div className="Tracks">
+                    {tracks.map((e) => (
+                        <div className="contents">
+                        <SongTrack 
+                            key={e.id}
+                            src={e.album.images[1].url}
+                            title={e.name}
+                            artist={e.artists[0].name}
+                            album={e.album.name}
+                            toggleSelect={() => toggleSelect(e)}
+                            />
+                        </div>
+                    ))}
+                </div>
+
+            </div>
+            <div className="Right">
+                <Playlist
+                accessToken={useSelector((state) => state.accessToken)}
+                uris={selectedTracksUri}
+                />
+            </div>
+        </div>        
         
     )
     

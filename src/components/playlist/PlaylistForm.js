@@ -22,7 +22,6 @@ const PlaylistForm = ({form, onSubmit, handleForm}) => {
                 onChange={handleForm}
             />
             <input type="submit" value="Submit"/>
-            <hr/>
         </form>
     )
 }
