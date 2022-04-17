@@ -1,31 +1,40 @@
 import React, { useState } from "react";
 import './track.css';
 
-const SongTrack = ({src , title, artist, album, toggleSelect}) => {
-    const [isSelected, setIsSelected] = useState(false)
+type SongTrackProps = {
+    src: string
+    title: string
+    artist: string
+    album: string
+    toggleSelect: () => void
+}
+// {src , title, artist, album, toggleSelect}
 
-    const handleToggleSelect = () => {
+const SongTrack = (props: SongTrackProps) => {
+    const [isSelected, setIsSelected] = useState<boolean>(false)
+
+    const handleToggleSelect: ()=> void = () => {
         setIsSelected(!isSelected)
-        toggleSelect()
+        props.toggleSelect()
     }
 
     return (            
             <div className="Track">
                 <div className="Img">
                     <img
-                        src={src}
-                        alt={title}
+                        src={props.src}
+                        alt={props.title}
                         />
                 </div>
                 <div className="Info">
                     <div className="title">
-                        <h2>{title}</h2>            
+                        <h2>{props.title}</h2>            
                     </div>
                     <div className="artist">
-                        <p>{artist}</p>
+                        <p>{props.artist}</p>
                     </div>
                     <div className="album">
-                        <p>{album}</p>            
+                        <p>{props.album}</p>            
                     </div>
                     <div className="play">
                         <span className="btn message" onClick={handleToggleSelect}>{isSelected ? 'Deselect' : 'Select'}</span>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SongTrack from '../../components/track/index.js'
-import Search from "../../components/search/index.js"
+import SongTrack from '../../components/track/index'
+import Search from "../../components/search/index"
 import config from '../../library/config.js'
 import './Home.css'
-import Playlist from "../../components/playlist/index.js";
+import Playlist from "../../components/playlist/index";
 import { useSelector, useDispatch } from "react-redux";
 import saveAccessToken from "../../redux/accessToken/accessTokenActions.js";
 import Button from '@material-ui/core/Button';
