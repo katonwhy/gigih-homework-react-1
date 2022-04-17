@@ -4,22 +4,29 @@ import './search.css'
 import SearchBar from "./SearchBar";
 import Button from '@material-ui/core/Button';
 
-const Search = ({accessToken, onSuccess, onClearSearch}) => {
+type SearchProps = {
+    accessToken: string
+    onSuccess: any
+    onClearSearch: () => void
+}
+//{accessToken, onSuccess, onClearSearch}
 
-    const [text, setText] = useState('')
-    const [isClear, setIsClear] = useState(true)
+const Search = (props: SearchProps) => {
 
-    const handleInput= (e) => {
+    const [text, setText] = useState<string>('')
+    const [isClear, setIsClear] = useState<boolean>(true)
+
+    const handleInput= (e: any) => {
         setText(e.target.value);
         console.log(text)
     }
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: any) => {
         e.preventDefault()
 
         var request = {
             headers: {
-                'Authorization': 'Bearer ' + accessToken,
+                'Authorization': 'Bearer ' + props.accessToken,
                 'Content-Type' : 'application/json',
             }
         }
@@ -27,7 +34,7 @@ const Search = ({accessToken, onSuccess, onClearSearch}) => {
         const response = await fetch(`${config.SPOTIFY_BASE_URL}/search?type=track&q=${text}`, request).then((data) => data.json())
 
         const tracks = response.tracks.items
-        onSuccess(tracks)
+        props.onSuccess(tracks)
         setIsClear(false)
         console.log(response)
         
@@ -36,7 +43,7 @@ const Search = ({accessToken, onSuccess, onClearSearch}) => {
     const handleClear = () => {
         setText('');
         setIsClear(true);
-        onClearSearch();
+        props.onClearSearch();
     }
 
     return(
