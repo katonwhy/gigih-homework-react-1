@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import config from '../../library/config.js'
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import config from '../../library/config'
 import saveAccessToken from "../../redux/accessToken/accessTokenActions.js";
 import setAuthorize from "../../redux/accessToken/authorizeActions.js";
 import Button from '@material-ui/core/Button';
 import './login.css'
 import logo from '../../assets/Spotify_Logo_Custom.png'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
-const getHost = () => {
-    const protocol = window.location.protocol;
-    const host = window.location.host;
-  
-    return `${protocol}//${host}`;
-  };
 
 const Login = () => {
     
@@ -36,7 +29,7 @@ const Login = () => {
         const state = Date.now().toString()
         const clientId = process.env.REACT_APP_SPOTIFY_API_KEY
     
-        return `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${getHost()}&state=${state}&scope=${config.SPOTIFY_SCOPE}`;
+        return `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${config.HOST}&state=${state}&scope=${config.SPOTIFY_SCOPE}`;
     }
 
     return (
