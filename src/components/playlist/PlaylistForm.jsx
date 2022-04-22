@@ -59,6 +59,7 @@ const PlaylistForm = ({form, onSubmit, handleForm, validateForm, validateFormMes
                 name="name"
                 fullWidth
                 required
+                data-testid="title-playlist"
                 error={validateForm}
                 helperText={validateFormMessage}
                 value={form.name} 
@@ -75,6 +76,7 @@ const PlaylistForm = ({form, onSubmit, handleForm, validateForm, validateFormMes
                 required
                 multiline
                 minRows={4}
+                data-testid="description-playlist"
                 value={form.description} 
                 onChange={handleForm}
             />
@@ -82,6 +84,7 @@ const PlaylistForm = ({form, onSubmit, handleForm, validateForm, validateFormMes
                 variant="outlined" 
                 type='submit' 
                 color="secondary"
+                data-testid="btn-create-playlist"
                 startIcon={<TurnedInNotIcon />}
                 disabled={validateForm}
             >CREATE Playlist
