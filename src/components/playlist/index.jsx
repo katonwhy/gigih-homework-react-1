@@ -3,6 +3,8 @@ import config from "../../library/config";
 import PlaylistForm from "./PlaylistForm";
 import './playlist.css'
 import axios from "axios"
+import logo from '../../assets/Spotify_Logo_Custom.png'
+
 
 const Playlist = ({accessToken, uris}) => {
     const [form, setForm] = useState({
@@ -10,10 +12,21 @@ const Playlist = ({accessToken, uris}) => {
         description : ""
     })
 
+    const [errorForm, setErrorForm] = useState(false);
+    const [errorFormMessage, setErrorFormMessage] = useState('');
+
     const handleForm = (e) => {
         const { name, value } = e.target
         setForm({...form, [name]: value})
+        if (form.name.length < 10) {
+            setErrorForm(true);
+            setErrorFormMessage('Playlist name should at least 10 characters long')
+        }else{
+            setErrorForm(false)
+            setErrorFormMessage('')
+        }
     }
+
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -30,8 +43,6 @@ const Playlist = ({accessToken, uris}) => {
 
         const responseUserId = response.id
         
-        console.log(responseUserId)
-
 
         //create playlist to userID
         const playlistData = JSON.stringify({
@@ -51,16 +62,13 @@ const Playlist = ({accessToken, uris}) => {
         const selectedTrackData = JSON.stringify({
             uris
         })
-        console.log(uris)
         const addTrackToPlaylist = await axios.post(
             `${config.SPOTIFY_BASE_URL}/playlists/${createPlaylist.data.id}/tracks`,
             selectedTrackData,
             request
         )
 
-        console.log(selectedTrackData)
         if (addTrackToPlaylist.data) {
-            console.log(addTrackToPlaylist.data.snapshot_id)
             alert('playlist created successfully!')
             setForm({ name: "", description: "" })
         }
@@ -72,7 +80,11 @@ const Playlist = ({accessToken, uris}) => {
                 form={form}
                 onSubmit={onSubmit}
                 handleForm={handleForm}
+                validateForm={errorForm}
+                validateFormMessage={errorFormMessage}
             />
+            <img src={logo} alt="app-logo" />
+            <p className="AppInfo">Search and select your favorite song, create your spotify music playlist based on your selected song track, you can select multiple song track by clearing the music lists and then searching different song track</p>
         </div>
     )
 }

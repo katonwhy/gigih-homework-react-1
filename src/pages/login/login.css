@@ -1,0 +1,17 @@
+.login {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.login p {
+    color: lightgrey;
+    margin-bottom: 30px;
+}
+.login img{
+    width: 500px;
+    margin-bottom: 30px;
+}

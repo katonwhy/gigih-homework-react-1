@@ -7,8 +7,11 @@
     grid-area: track;
     display: flex;
     flex-direction: row;
-    /* border: 2px solid #3b3b3b; */
     background-color: #2e2e2e;
+  }
+  .Track:hover{
+    box-shadow: 0 4px 8px 0 lime, 0 6px 20px 0 lime;
+    /* border-bottom: 1px solid lime; */
   }
   .Info {
     display: flex;
@@ -46,15 +49,17 @@
     text-align: center;
   }
 
-  .img img{
-    width: 64px;
+  .Duration {
+    font-weight: bold;
   }
+
   .Track p {
     color: #e1e1e1;
   }
   
   .btn {
     color: white;
+    font-weight: bold;
     display: inline-block;
     opacity: 0.8;
     border-radius: 4px;
