@@ -18,7 +18,6 @@ const Search = (props: SearchProps) => {
 
     const handleInput= (e: any) => {
         setText(e.target.value);
-        console.log(text)
     }
 
     const onSubmit = async (e: any) => {
@@ -36,7 +35,6 @@ const Search = (props: SearchProps) => {
         const tracks = response.tracks.items
         props.onSuccess(tracks)
         setIsClear(false)
-        console.log(response)
         
     }
 
@@ -55,7 +53,14 @@ const Search = (props: SearchProps) => {
                 handleInput={handleInput}
             />
             {!isClear &&(
-                <Button variant="contained" color="secondary" onClick={handleClear}>Clear Search</Button>
+                <div className="btnClear">
+                    <Button 
+                        variant="contained"
+                        color="secondary" 
+                        onClick={handleClear}
+                        >Clear Search
+                    </Button>
+                </div>
             )}
         </div>
     )  

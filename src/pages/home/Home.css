@@ -15,10 +15,6 @@
     grid-area: right;
 }
 
-.login {
-    text-align: center;
-}
-
 .Tracks{
     display: grid;
     grid-template-areas: 'track track';

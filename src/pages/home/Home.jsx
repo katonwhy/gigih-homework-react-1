@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SongTrack from '../../components/track/index'
 import Search from "../../components/search/index"
-import config from '../../library/config.js'
 import './Home.css'
 import Playlist from "../../components/playlist/index";
 import { useSelector, useDispatch } from "react-redux";
-import saveAccessToken from "../../redux/accessToken/accessTokenActions.js";
-import Button from '@material-ui/core/Button';
 
 const Home = () => {
 
@@ -15,14 +12,7 @@ const Home = () => {
     const [selectedTracksUri, setSelectedTracksUri] = useState([])
     const [isInSearch, setIsInSearch] = useState(true);
 
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        const accessTokenUrl = new URLSearchParams(window.location.hash).get('#access_token')
-        dispatch(saveAccessToken(accessTokenUrl))
-        //setIsAuthorize(true)
-    }, [])
-    console.log(useSelector((state) => state.accessToken))
+    
     
     useEffect(() => {
         if (!isInSearch) {
@@ -31,13 +21,7 @@ const Home = () => {
         }
     }, [selectedTracksUri])
 
-    const getSpotifyLinkAuthorize = () => {
-        const state = Date.now().toString()
-        const clientId = process.env.REACT_APP_SPOTIFY_API_KEY
-        const redirect_uri = 'http://localhost:3000'
     
-        return `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirect_uri}&state=${state}&scope=${config.SPOTIFY_SCOPE}`;
-    }
 
     const filterSelectedTracks = () => {
         return tracks.filter(track => selectedTracksUri.includes(track.uri))
@@ -71,10 +55,6 @@ const Home = () => {
         <div className="GridContainer">
             <div className="Main">
 
-                <div className="login">
-                    <Button variant="contained" color="primary" href={`${getSpotifyLinkAuthorize()}`}>Login</Button>
-                </div>
-
                 <Search 
                 accessToken = {useSelector((state) => state.accessToken)}
                 onSuccess = {(tracks) => onSuccessSearch(tracks)}
@@ -82,16 +62,15 @@ const Home = () => {
                 />
                 <div className="Tracks">
                     {tracks.map((e) => (
-                        <div className="contents">
                         <SongTrack 
                             key={e.id}
                             src={e.album.images[1].url}
                             title={e.name}
                             artist={e.artists[0].name}
                             album={e.album.name}
+                            duration={e.duration_ms}
                             toggleSelect={() => toggleSelect(e)}
                             />
-                        </div>
                     ))}
                 </div>
 

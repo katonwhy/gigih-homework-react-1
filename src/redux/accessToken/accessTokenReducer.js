@@ -1,5 +1,6 @@
 const initialState = {
-    accessToken: ''
+    accessToken: '',
+    isAuthorized: false,
 }
 
 const accessTokenReducer = (state = initialState, actions) => {
@@ -9,6 +10,12 @@ const accessTokenReducer = (state = initialState, actions) => {
             ...state,
             accessToken: actions.payload
           }
+
+      case 'SET_AUTHORIZE':
+        return {
+          ...state,
+          isAuthorized: actions.payload
+        }
   
       default:
           return state
